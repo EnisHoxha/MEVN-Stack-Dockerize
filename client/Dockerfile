@@ -1,6 +1,6 @@
-# Dockerfile for React client
+# Dockerfile for Vue client
 
-# Build react client
+# Build vue client
 FROM node:10.16-alpine
 
 # Working directory be app
