@@ -47,7 +47,6 @@ services:
       - "9090:9090"
     networks:
       - app-network
-    
   mongo-express:
     image: mongo-express
     container_name: mongo-express
@@ -56,13 +55,26 @@ services:
     networks:
       - app-network
     environment: 
-        ME_CONFIG_MONGODB_SERVER: mongodb
+        ME_CONFIG_MONGODB_SERVER: mongodb  
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    image: nginx-webserver
+    container_name: nginx
+    restart: always
+    depends_on:
+      - server
+      - client
+    ports:
+      - 80:80
+    networks:
+      - app-network
 
-
+  
 networks:
     app-network:
         driver: bridge
-
 volumes:
     data-volume:
     node_modules:
